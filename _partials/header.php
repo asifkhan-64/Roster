@@ -8,8 +8,6 @@
     $query = mysqli_query($connect, "SELECT user_role FROM login_user WHERE email = '$sesssionEmail' ");
     $fetch_query = mysqli_fetch_assoc($query);
     
-    $get = mysqli_query($connect, "SELECT shop_name FROM `shop_info`");
-    $fet = mysqli_fetch_assoc($get);
 
 ?>
 <!DOCTYPE html>
@@ -20,7 +18,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <title><?php echo $fet['shop_name']; ?></title>
+    <title>Roster</title>
     <meta content="Admin Dashboard" name="description" />
     <meta content="ThemeDesign" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -86,14 +84,14 @@
                         <li class="has_sub">
                             <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-building"></i> <span> Institutes</span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                             <ul class="list-unstyled">
-                                <li><a href="company_list.php">Institutes List</a></li>
+                                <li><a href="institutes_list.php">Institutes List</a></li>
                             </ul>
                         </li>
 
                         <li class="has_sub">
                             <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-mobile"></i> <span> Technology</span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                             <ul class="list-unstyled">
-                                <li><a href="model_list.php">Technology List</a></li>
+                                <li><a href="technology_list.php">Technology List</a></li>
                             </ul>
                         </li>
                                            
