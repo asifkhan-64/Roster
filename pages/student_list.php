@@ -62,14 +62,13 @@
                                     <th>Name</th>
                                     <th>Father Name</th>
                                     <th>Institute</th>
-                                    <th>Month of Entry</th>
                                     <th class="text-center"> <i class="fa fa-edit"></i>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php 
-                                $retStdData = mysqli_query($connect, "SELECT students.std_id, students.std_name, students.std_fname, students.std_ins, students.std_month, students.month_count, institutes.institutes_name FROM `students`
+                                $retStdData = mysqli_query($connect, "SELECT students.std_id, students.std_name, students.std_fname, students.std_ins, institutes.institutes_name FROM `students`
                                                                         INNER JOIN institutes ON institutes.i_id = students.std_ins");
                                 $iteration = 1;
 
@@ -79,33 +78,7 @@
                                         <td>'.$iteration++.'</td>
                                         <td>'.$rowStdData['std_name'].'</td>
                                         <td>'.$rowStdData['std_fname'].'</td>
-                                        <td>'.$rowStdData['institutes_name'].'</td>';
-                                        if ($rowStdData['std_month'] === '1') {
-                                            echo '<td>January</td>';
-                                        }elseif ($rowStdData['std_month'] === '2') {
-                                            echo '<td>Febuary</td>';
-                                        }elseif ($rowStdData['std_month'] === '3') {
-                                            echo '<td>March</td>';
-                                        }elseif ($rowStdData['std_month'] === '4') {
-                                            echo '<td>April</td>';
-                                        }elseif ($rowStdData['std_month'] === '5') {
-                                            echo '<td>May</td>';
-                                        }elseif ($rowStdData['std_month'] === '6') {
-                                            echo '<td>June</td>';
-                                        }elseif ($rowStdData['std_month'] === '7') {
-                                            echo '<td>July</td>';
-                                        }elseif ($rowStdData['std_month'] === '8') {
-                                            echo '<td>Auguest</td>';
-                                        }elseif ($rowStdData['std_month'] === '9') {
-                                            echo '<td>September</td>';
-                                        }elseif ($rowStdData['std_month'] === '10') {
-                                            echo '<td>October</td>';
-                                        }elseif ($rowStdData['std_month'] === '11') {
-                                            echo '<td>November</td>';
-                                        }elseif ($rowStdData['std_month'] === '12') {
-                                            echo '<td>December</td>';
-                                        }
-                                        echo '
+                                        <td>'.$rowStdData['institutes_name'].'</td>
                                         <td class="text-center"><a href="student_edit.php?id='.$rowStdData['std_id'].'" type="button" class="btn text-white btn-warning waves-effect waves-light">Edit</a></td>
                                     </tr>
                                     ';

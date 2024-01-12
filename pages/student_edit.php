@@ -13,37 +13,25 @@
     $fetch_getStdData = mysqli_fetch_assoc($getStdData);
 
 
-    if (isset($_POST['addStudent'])) {
+    if (isset($_POST['editStudent'])) {
 
         $std_name   = $_POST['std_name'];
         $std_fname  = $_POST['std_fname'];
         $std_ins    = $_POST['std_ins'];
         $std_tech   = $_POST['std_tech'];
-        $std_ward   = $_POST['std_ward'];
-        $std_month  = $_POST['std_month'];
+        $id         = $_POST['id'];
 
         $queryAddStock = mysqli_query($connect, 
-            "INSERT INTO `students`(
-                `std_name`,
-                 `std_fname`,
-                  `std_ins`,
-                   `std_tech`,
-                    `month_one`,
-                     `std_month`,
-                      `month_count`
-                ) VALUES (
-                    '$std_name',
-                     '$std_fname',
-                      '$std_ins',
-                       '$std_tech',
-                        '$std_ward',
-                         '$std_month',
-                          '1'
-            )
-           ");
+            "UPDATE `students` SET
+                `std_name` = '$std_name',
+                 `std_fname` = '$std_fname',
+                  `std_ins` = '$std_ins',
+                   `std_tech` = '$std_tech'
+                     WHERE std_id = '$id'
+            ");
 
         if (!$queryAddStock) {
-            $notAdded = 'Not added';
+            $notAdded = 'Not Updated';
         }else {
             header("LOCATION: student_list.php");
         }
@@ -58,7 +46,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <h5 class="page-title">Add Student</h5>
+                <h5 class="page-title">Edit Student</h5>
             </div>
         </div>
 
@@ -75,6 +63,8 @@
                                 <div class="col-sm-4">
                                     <input type="text" class="form-control" value="<?php echo $fetch_getStdData['std_name'] ?>" name="std_name" placeholder="Student Name" required="">
                                 </div>
+
+                                <input type="hidden" name="id" value="<?php echo $id ?>">
 
                                 <label class="col-sm-2 col-form-label">Father Name</label>
                                 <div class="col-sm-4">
@@ -124,23 +114,23 @@
                             <div class="form-group row">
                                
 
-                                <label class="col-sm-2 col-form-label">Month</label>
+                                <!-- <label class="col-sm-2 col-form-label">Month</label>
                                 <div class="col-sm-4">
                                     <?php
-                                        $getMonths = mysqli_query($connect, "SELECT * FROM months");
+                                        // $getMonths = mysqli_query($connect, "SELECT * FROM months");
                                         
-                                        echo '<select class="form-control comp" name="std_month" required>';
-                                        while ($row = mysqli_fetch_assoc($getMonths)) {
-                                            if ($row['m_id'] === $fetch_getStdData['std_month']) {
-                                                echo '<option value="'.$row['m_id'].'" selected>'.$row['month_name'].'</option>';
-                                            }else {
-                                                echo '<option value="'.$row['m_id'].'">'.$row['month_name'].'</option>';
-                                            }
-                                        }
+                                        // echo '<select class="form-control comp" name="std_month" required>';
+                                        // while ($row = mysqli_fetch_assoc($getMonths)) {
+                                        //     if ($row['m_id'] === $fetch_getStdData['std_month']) {
+                                        //         echo '<option value="'.$row['m_id'].'" selected>'.$row['month_name'].'</option>';
+                                        //     }else {
+                                        //         echo '<option value="'.$row['m_id'].'">'.$row['month_name'].'</option>';
+                                        //     }
+                                        // }
 
-                                        echo '</select>';
+                                        // echo '</select>';
                                     ?>
-                                </div>
+                                </div> -->
 
 
                             </div>
@@ -150,7 +140,7 @@
                             <div class="form-group row">
                                 <div class="col-sm-12"  align="right">
                                     <?php include('../_partials/cancel.php') ?>
-                                    <button type="submit" name="addStudent" class="btn btn-primary waves-effect waves-light">Add Student</button>
+                                    <button type="submit" name="editStudent" class="btn btn-primary waves-effect waves-light">Edit Student</button>
                                 </div>
                             </div>
                             

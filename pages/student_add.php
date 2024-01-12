@@ -15,22 +15,18 @@
         $std_fname  = $_POST['std_fname'];
         $std_ins    = $_POST['std_ins'];
         $std_tech   = $_POST['std_tech'];
-        $std_ward   = $_POST['std_ward'];
-        $std_month  = $_POST['std_month'];
 
         $queryAddStock = mysqli_query($connect, 
             "INSERT INTO `students`(
                 `std_name`,
                  `std_fname`,
                   `std_ins`,
-                   `std_tech`,
-                     `std_month`
+                   `std_tech`
                 ) VALUES (
                     '$std_name',
                      '$std_fname',
                       '$std_ins',
-                       '$std_tech',
-                         '$std_month'
+                       '$std_tech'
             )
            ");
 
@@ -121,19 +117,21 @@
                                     ?>
                                 </div> -->
 
-                                <label class="col-sm-2 col-form-label">Month</label>
+                                <!-- <label class="col-sm-2 col-form-label">Month</label>
                                 <div class="col-sm-4">
                                     <?php
-                                        $getMonths = mysqli_query($connect, "SELECT * FROM months");
+                                        // $getMonths = mysqli_query($connect, "SELECT * FROM months");
                                         
-                                        echo '<select class="form-control comp" name="std_month" required>';
-                                        while ($row = mysqli_fetch_assoc($getMonths)) {
-                                            echo '<option value="'.$row['m_id'].'">'.$row['month_name'].'</option>';
-                                        }
+                                        // echo '<select class="form-control comp" name="std_month" required>';
+                                        // while ($row = mysqli_fetch_assoc($getMonths)) {
+                                        //     echo '<option value="'.$row['m_id'].'">'.$row['month_name'].'</option>';
+                                        // }
 
-                                        echo '</select>';
+                                        // echo '</select>';
+                                        
                                     ?>
-                                </div>
+                                    
+                                </div> -->
 
 
                             </div>
