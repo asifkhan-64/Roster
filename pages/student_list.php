@@ -45,7 +45,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <h5 class="page-title">Institutes</h5>
+                <h5 class="page-title">Students</h5>
             </div>
         </div>
         <!-- end row -->
@@ -53,52 +53,60 @@
             <div class="col-12">
                 <div class="card m-b-30">
                     <div class="card-body">
-                        <form method="POST">
-                            <div class="form-group row">
-                                <label for="example-text-input" class="col-sm-2 col-form-label">Name</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" placeholder="Institutes Name" type="text" value="" id="example-text-input" name="institutesName" required="">
-                                </div>
-                            </div><hr>
-                            <div class="form-group row">
-                                <!-- <label for="example-password-input" class="col-sm-2 col-form-label"></label> -->
-                                <div class="col-sm-12" align="right">
-                                    <?php include('../_partials/cancel.php') ?>
-                                    <button type="submit" class="btn btn-primary waves-effect waves-light" name="addInstitutes">Add Institute</button>
-                                </div>
-                            </div>
-                        </form>
-                        <h5 align="center"><?php echo $error ?></h5>
-                        <h5 align="center"><?php echo $added ?></h5>
-                        <h5 align="center"><?php echo $alreadyAdded ?></h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12">
-                <div class="card m-b-30">
-                    <div class="card-body">
-                        <h4 class="mt-0 header-title">Institutes List</h4>
+                        <h4 class="mt-0 header-title">Students List</h4>
                        
                         <table id="datatable" class="table dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Institute Name</th>
+                                    <th>Name</th>
+                                    <th>Father Name</th>
+                                    <th>Institute</th>
+                                    <th>Month of Entry</th>
                                     <th class="text-center"> <i class="fa fa-edit"></i>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php 
-                                $retInstitutes = mysqli_query($connect, "SELECT * FROM institutes");
+                                $retStdData = mysqli_query($connect, "SELECT students.std_id, students.std_name, students.std_fname, students.std_ins, students.std_month, students.month_count, institutes.institutes_name FROM `students`
+                                                                        INNER JOIN institutes ON institutes.i_id = students.std_ins");
                                 $iteration = 1;
 
-                                while ($rowInstitutes = mysqli_fetch_assoc($retInstitutes)) {
+                                while ($rowStdData = mysqli_fetch_assoc($retStdData)) {
                                     echo '
                                     <tr>
                                         <td>'.$iteration++.'</td>
-                                        <td>'.$rowInstitutes['institutes_name'].'</td>
-                                        <td class="text-center"><a href="institute_edit.php?id='.$rowInstitutes['i_id'].'" type="button" class="btn text-white btn-warning waves-effect waves-light">Edit</a></td>
+                                        <td>'.$rowStdData['std_name'].'</td>
+                                        <td>'.$rowStdData['std_fname'].'</td>
+                                        <td>'.$rowStdData['institutes_name'].'</td>';
+                                        if ($rowStdData['std_month'] === '1') {
+                                            echo '<td>January</td>';
+                                        }elseif ($rowStdData['std_month'] === '2') {
+                                            echo '<td>Febuary</td>';
+                                        }elseif ($rowStdData['std_month'] === '3') {
+                                            echo '<td>March</td>';
+                                        }elseif ($rowStdData['std_month'] === '4') {
+                                            echo '<td>April</td>';
+                                        }elseif ($rowStdData['std_month'] === '5') {
+                                            echo '<td>May</td>';
+                                        }elseif ($rowStdData['std_month'] === '6') {
+                                            echo '<td>June</td>';
+                                        }elseif ($rowStdData['std_month'] === '7') {
+                                            echo '<td>July</td>';
+                                        }elseif ($rowStdData['std_month'] === '8') {
+                                            echo '<td>Auguest</td>';
+                                        }elseif ($rowStdData['std_month'] === '9') {
+                                            echo '<td>September</td>';
+                                        }elseif ($rowStdData['std_month'] === '10') {
+                                            echo '<td>October</td>';
+                                        }elseif ($rowStdData['std_month'] === '11') {
+                                            echo '<td>November</td>';
+                                        }elseif ($rowStdData['std_month'] === '12') {
+                                            echo '<td>December</td>';
+                                        }
+                                        echo '
+                                        <td class="text-center"><a href="student_edit.php?id='.$rowStdData['std_id'].'" type="button" class="btn text-white btn-warning waves-effect waves-light">Edit</a></td>
                                     </tr>
                                     ';
                                 }

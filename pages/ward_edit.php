@@ -11,29 +11,29 @@
 
     $id = $_GET['id'];
 
-    $retData = mysqli_query($connect, "SELECT * FROM institutes WHERE i_id = '$id'");
+    $retData = mysqli_query($connect, "SELECT * FROM wards WHERE w_id = '$id'");
     $fetch_retData = mysqli_fetch_assoc($retData);
-    $instituteName = $fetch_retData['institutes_name'];
+    $wardName = $fetch_retData['ward_name'];
 
-    if (isset($_POST['updateInstitute'])) {
+    if (isset($_POST['updateWard'])) {
         $id = $_POST['id'];
-        $instituteName = $_POST['instituteName'];
+        $wardName = $_POST['wardName'];
 
         
-        $countQuery = mysqli_query($connect, "SELECT COUNT(*)AS countedIns FROM institutes WHERE institutes_name = '$instituteName'");
+        $countQuery = mysqli_query($connect, "SELECT COUNT(*)AS countedWard FROM wards WHERE ward_name = '$wardName'");
         $fetch_countQuery = mysqli_fetch_assoc($countQuery);
 
 
-        if ($fetch_countQuery['countedIns'] == 0) {
-            $updateQuery = mysqli_query($connect, "UPDATE institutes SET institutes_name = '$instituteName' WHERE i_id = '$id'");
+        if ($fetch_countQuery['countedWard'] == 0) {
+            $updateQuery = mysqli_query($connect, "UPDATE wards SET ward_name = '$wardName' WHERE w_id = '$id'");
             if (!$updateQuery) {
                 $error = 'Not Added! Try again!';
             }else {
-                header("LOCATION: institutes_list.php");
+                header("LOCATION: ward_list.php");
             }
         }else {
             $alreadyAdded = '<div class="alert alert-dark" role="alert">
-                                Institute Already Added!
+                                Ward Already Added!
                              </div>';
         }
     }
@@ -46,7 +46,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <h5 class="page-title">Institute Edit</h5>
+                <h5 class="page-title">Ward Edit</h5>
             </div>
         </div>
         <!-- end row -->
@@ -59,7 +59,7 @@
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Name</label>
                                 <div class="col-sm-4">
-                                    <input class="form-control" value="<?php echo $instituteName ?>" placeholder="Institute Name" type="text" value="" id="example-text-input"  name="instituteName"  required="">
+                                    <input class="form-control" value="<?php echo $wardName ?>" placeholder="Ward Name" type="text" value="" id="example-text-input"  name="wardName"  required="">
                                 </div>
                             </div>
                             <hr />
@@ -67,7 +67,7 @@
                                 <label for="example-password-input" class="col-sm-2 col-form-label"></label>
                                 <div class="col-sm-10">
                                     <?php include('../_partials/cancel.php') ?>
-                                    <button type="submit" class="btn btn-primary waves-effect waves-light" name="updateInstitute">Update Institute</button>
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light" name="updateWard">Update Ward</button>
                                 </div>
                             </div>
                         </form>

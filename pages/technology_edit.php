@@ -11,25 +11,25 @@
 
     $id = $_GET['id'];
 
-    $retData = mysqli_query($connect, "SELECT * FROM institutes WHERE id = '$id'");
+    $retData = mysqli_query($connect, "SELECT * FROM technology WHERE t_id = '$id'");
     $fetch_retData = mysqli_fetch_assoc($retData);
-    $instituteName = $fetch_retData['institutes_name'];
+    $technologyName = $fetch_retData['technology_name'];
 
-    if (isset($_POST['updateInstitute'])) {
+    if (isset($_POST['updateTechnology'])) {
         $id = $_POST['id'];
-        $instituteName = $_POST['instituteName'];
+        $technologyName = $_POST['technologyName'];
 
         
-        $countQuery = mysqli_query($connect, "SELECT COUNT(*)AS countedIns FROM institutes WHERE institutes_name = '$instituteName'");
+        $countQuery = mysqli_query($connect, "SELECT COUNT(*)AS countedIns FROM technology WHERE technology_name = '$technologyName'");
         $fetch_countQuery = mysqli_fetch_assoc($countQuery);
 
 
         if ($fetch_countQuery['countedIns'] == 0) {
-            $updateQuery = mysqli_query($connect, "UPDATE institutes SET institutes_name = '$instituteName' WHERE id = '$id'");
+            $updateQuery = mysqli_query($connect, "UPDATE technology SET technology_name = '$technologyName' WHERE t_id = '$id'");
             if (!$updateQuery) {
-                $error = 'Not Added! Try agian!';
+                $error = 'Not Added! Try again!';
             }else {
-                header("LOCATION: institutes_list.php");
+                header("LOCATION: technology_list.php");
             }
         }else {
             $alreadyAdded = '<div class="alert alert-dark" role="alert">
@@ -46,7 +46,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <h5 class="page-title">Institute Edit</h5>
+                <h5 class="page-title">Technology Edit</h5>
             </div>
         </div>
         <!-- end row -->
@@ -59,14 +59,15 @@
                             <div class="form-group row">
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Name</label>
                                 <div class="col-sm-4">
-                                    <input class="form-control" value="<?php echo $instituteName ?>" placeholder="Institute Name" type="text" value="" id="example-text-input"  name="instituteName"  required="">
+                                    <input class="form-control" value="<?php echo $technologyName ?>" placeholder="Technology Name" type="text" value="" id="example-text-input"  name="technologyName"  required="">
                                 </div>
                             </div>
+                            <hr />
                             <div class="form-group row">
                                 <label for="example-password-input" class="col-sm-2 col-form-label"></label>
                                 <div class="col-sm-10">
                                     <?php include('../_partials/cancel.php') ?>
-                                    <button type="submit" class="btn btn-primary waves-effect waves-light" name="updateInstitute">Update Institute</button>
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light" name="updateTechnology">Update Technology</button>
                                 </div>
                             </div>
                         </form>

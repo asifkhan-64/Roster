@@ -98,15 +98,15 @@
                         <li class="has_sub">
                             <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-chart-line"></i> <span> Ward </span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                             <ul class="list-unstyled">
-                                <li><a href="stock_list.php">Ward List</a></li>
+                                <li><a href="ward_list.php">Ward List</a></li>
                             </ul>
                         </li>
 
                         <li class="has_sub">
                             <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-users"></i> <span> Students </span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                             <ul class="list-unstyled">
-                                <li><a href="customer_add.php">Add Student</a></li>
-                                <li><a href="customers_list.php">Students List</a></li>
+                                <li><a href="student_add.php">Add Student</a></li>
+                                <li><a href="student_list.php">Students List</a></li>
                             </ul>
                         </li>
 
