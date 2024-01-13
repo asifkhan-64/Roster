@@ -12,8 +12,9 @@
     if (isset($_POST['roster'])) {
 
         $std_ins    = $_POST['std_ins'];
+        $month    = $_POST['month'];
         
-        header("LOCATION: roster_college.php?ins=".$std_ins."");
+        header("LOCATION: roster_college.php?ins=".$std_ins."&month=".$month."");
     }
 
 
@@ -37,14 +38,28 @@
                         <form method="POST">
 
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Select Institute</label>
-                                <div class="col-sm-9">
+                                <label class="col-sm-2 col-form-label">Select Institute</label>
+                                <div class="col-sm-4">
                                     <?php
                                         $getInstitutes = mysqli_query($connect, "SELECT * FROM institutes");
                                         
                                         echo '<select class="form-control comp" name="std_ins" required>';
                                         while ($row = mysqli_fetch_assoc($getInstitutes)) {
                                             echo '<option value="'.$row['i_id'].'">'.$row['institutes_name'].'</option>';
+                                        }
+
+                                        echo '</select>';
+                                    ?>
+                                </div>
+
+                                <label class="col-sm-2 col-form-label">Select Month</label>
+                                <div class="col-sm-4">
+                                    <?php
+                                        $getMonths = mysqli_query($connect, "SELECT * FROM months");
+                                        
+                                        echo '<select class="form-control comp" name="month" required>';
+                                        while ($row = mysqli_fetch_assoc($getMonths)) {
+                                            echo '<option value="'.$row['m_id'].'">'.$row['month_name'].'</option>';
                                         }
 
                                         echo '</select>';

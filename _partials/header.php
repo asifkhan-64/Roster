@@ -115,7 +115,7 @@
                             <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-hand-holding-usd"></i> <span> Roster </span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                             <ul class="list-unstyled">
                                 <li><a href="roster_add.php">Add Roster</a></li>
-                                <li><a href="sell_list.php">Roster List</a></li>
+                                <li><a href="roster_list.php">Roster List</a></li>
                             </ul>
                         </li>
 

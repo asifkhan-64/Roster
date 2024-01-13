@@ -37,49 +37,36 @@
             $s_id = $s_id_array[$i];
             $std_ward = $std_ward_array[$i];
 
-            $insertQuery = mysqli_query($connect, "INSERT INTO roster_db(s_id, refNo, month_of, std_ins, r_ward)VALUES('$s_id', '$refNo', '$month', '$ins', '$std_ward')");
+            $getMonthCountMax = mysqli_query($connect, "SELECT month_count FROM students WHERE std_id = '$s_id'");
+            $fetch_getMonthCountMax = mysqli_fetch_assoc($getMonthCountMax);
             
-            if ($insertQuery) {
+            $getStdData = mysqli_query($connect, "SELECT month_count FROM students WHERE std_id = '$s_id'");
+            $fetch_getStdData = mysqli_fetch_assoc($getStdData);
 
-                $updateMonthCount = mysqli_query($connect, "UPDATE students SET month_count = (month_count + 1) WHERE std_id = '$s_id'");
+            $month_count = $fetch_getStdData['month_count'];
 
-                if ($updateMonthCount) {
+            $getWardName = mysqli_query($connect, "SELECT ward_name FROM wards WHERE w_id = '$std_ward'");
+            $fetch_getWardName = mysqli_fetch_assoc($getWardName);
+            $stdWardName = $fetch_getWardName['ward_name'];
 
-                    $getMonthCountMax = mysqli_query($connect, "SELECT month_count FROM students WHERE std_id = '$s_id'");
-                    $fetch_getMonthCountMax = mysqli_fetch_assoc($getMonthCountMax);
-                    if ($fetch_getMonthCountMax === '6') {
-                        
-                    }else {
-                        $getStdData = mysqli_query($connect, "SELECT month_count FROM students WHERE std_id = '$s_id'");
-                        $fetch_getStdData = mysqli_fetch_assoc($getStdData);
-
-                        $month_count = $fetch_getStdData['month_count'];
-
-                        $getWardName = mysqli_query($connect, "SELECT ward_name FROM wards WHERE w_id = '$std_ward'");
-                        $fetch_getWardName = mysqli_fetch_assoc($getWardName);
-                        $stdWardName = $fetch_getWardName['ward_name'];
-
-                        if ($month_count === '1') {
-                            $updateStudentTable = mysqli_query($connect, "UPDATE students SET month_one = '$stdWardName' WHERE std_id = '$s_id'");
-                        }elseif ($month_count === '2') {
-                            $updateStudentTable = mysqli_query($connect, "UPDATE students SET month_two = '$stdWardName' WHERE std_id = '$s_id'");
-                        }elseif ($month_count === '3') {
-                            $updateStudentTable = mysqli_query($connect, "UPDATE students SET month_three = '$stdWardName' WHERE std_id = '$s_id'");
-                        }elseif ($month_count === '4') {
-                            $updateStudentTable = mysqli_query($connect, "UPDATE students SET month_four = '$stdWardName' WHERE std_id = '$s_id'");
-                        }elseif ($month_count === '5') {
-                            $updateStudentTable = mysqli_query($connect, "UPDATE students SET month_five = '$stdWardName' WHERE std_id = '$s_id'");
-                        }elseif ($month_count === '6') {
-                            $updateStudentTable = mysqli_query($connect, "UPDATE students SET month_six = '$stdWardName' WHERE std_id = '$s_id'");
-                        }
-                    }
-                }
+            if ($month_count === '1') {
+                $updateStudentTable = mysqli_query($connect, "UPDATE students SET month_one = '$stdWardName' WHERE std_id = '$s_id'");
+            }elseif ($month_count === '2') {
+                $updateStudentTable = mysqli_query($connect, "UPDATE students SET month_two = '$stdWardName' WHERE std_id = '$s_id'");
+            }elseif ($month_count === '3') {
+                $updateStudentTable = mysqli_query($connect, "UPDATE students SET month_three = '$stdWardName' WHERE std_id = '$s_id'");
+            }elseif ($month_count === '4') {
+                $updateStudentTable = mysqli_query($connect, "UPDATE students SET month_four = '$stdWardName' WHERE std_id = '$s_id'");
+            }elseif ($month_count === '5') {
+                $updateStudentTable = mysqli_query($connect, "UPDATE students SET month_five = '$stdWardName' WHERE std_id = '$s_id'");
+            }elseif ($month_count === '6') {
+                $updateStudentTable = mysqli_query($connect, "UPDATE students SET month_six = '$stdWardName' WHERE std_id = '$s_id'");
             }
 
+            $updateRosterDb = mysqli_query($connect, "UPDATE roster_db SET r_ward = '$std_ward' WHERE s_id = '$s_id'");
         }
-        $insertSummary = mysqli_query($connect, "INSERT INTO roster_summary(ins_id, refNo, month_of)VALUES('$ins', '$refNo', '$month')");
 
-        if ($insertSummary) {
+        if ($updateRosterDb) {
             header("LOCATION: roster_list.php");
         }
     }
@@ -91,7 +78,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <h5 class="page-title text-center">Duty Roster for Students of <?php echo $fetch_getIns['institutes_name'] ?></h5>
+                <h5 class="page-title text-center">(Edit) Duty Roster for Students of <?php echo $fetch_getIns['institutes_name'] ?></h5>
             </div>
         </div>
         
@@ -100,7 +87,7 @@
                 <div class="card m-b-30">
                     <form method="POST">
                         <div class="card-body">
-                            <button class="btn btn-primary p-3 m-2" style="width: 30%;" name="submit" type="submit">Add Roster</button>                        
+                            <button class="btn btn-primary p-3 m-2" style="width: 30%;" name="submit" type="submit">Update Roster</button>                        
                             <table id="datatables" class="table dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
                                     <tr>
@@ -130,13 +117,22 @@
                                                 <td><b><u><a href="old_data.php?id='.$rowStdData['std_id'].'" target="_blank" style="color:black">'.$rowStdData['std_name'].'</a></u></b></td>
                                                 <td>'.$rowStdData['std_fname'].'</td>
                                                 <td>'.$rowStdData['technology_name'].'</td>
-                                                <td class="text-center">'."0".''.$rowStdData['month_count'] + 1 .'</td>';
+                                                <td class="text-center">'."0".''.$rowStdData['month_count'].'</td>';
 
-                                                $getInstitutes = mysqli_query($connect, "SELECT * FROM wards");
+                                                $getWard = mysqli_query($connect, "SELECT * FROM wards");
+                                                $studentId = $rowStdData['std_id'];
+
+                                                $getRosterData = mysqli_query($connect, "SELECT r_ward FROM roster_db WHERE s_id = $studentId");
+                                                $fetch_getRosterData = mysqli_fetch_assoc($getRosterData);
+                                                $r_id = $fetch_getRosterData['r_ward'];
                                                 
                                                 echo '<td><select style="width: 110% !important" class="form-control comp" name="std_ward[]" required>';
-                                                while ($row = mysqli_fetch_assoc($getInstitutes)) {
-                                                    echo '<option value="'.$row['w_id'].'">'.$row['ward_name'].'</option>';
+                                                while ($row = mysqli_fetch_assoc($getWard)) {
+                                                    if ($r_id === $row['w_id']) {
+                                                        echo '<option value="'.$row['w_id'].'" selected>'.$row['ward_name'].'</option>';
+                                                    }else {
+                                                        echo '<option value="'.$row['w_id'].'">'.$row['ward_name'].'</option>';
+                                                    }
                                                 }
                                                 date_default_timezone_set("Asia/Karachi");
                                                 $currentYear = date("Y/m");
