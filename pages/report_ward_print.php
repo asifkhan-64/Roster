@@ -10,12 +10,12 @@
     $query = mysqli_query($connect, "SELECT * FROM months WHERE m_id = '$month'");
     $fetchQuery = mysqli_fetch_assoc($query);
 
-    $ins = $_GET['ins'];
+    $ward = $_GET['ward'];
 
     // $refNo = $_GET['refNo'];
 
-    $getIns = mysqli_query($connect, "SELECT institutes_name FROM institutes WHERE i_id = '$ins'");
-    $fetch_getIns = mysqli_fetch_assoc($getIns);
+    $getWard = mysqli_query($connect, "SELECT ward_name FROM wards WHERE w_id = '$ward'");
+    $fetch_getWard = mysqli_fetch_assoc($getWard);
 
 
 
@@ -65,7 +65,7 @@
                 <!-- <div class="card m-b-30"> -->
                     <p align="center" style="font-size: 12px !important; line-height: 0.6rem !important; line-height: 0.6rem !important; margin-bottom: 0.1rem;"><b>SAIDU GROUP OF TEACHING HOSPITALS, SWAT</b></p>
                     <p align="center" style="font-size: 12px !important; line-height: 1rem !important; margin-bottom: 0.1rem;"><b>
-                        DUTY ROSTER REPORT FOR STUDENTS OF <?php echo $fetch_getIns['institutes_name']; ?> FOR THE MONTH OF <?php echo strtoupper($fetchQuery['month_name']); ?>
+                        DUTY ROSTER REPORT FOR WARD: <u><?php echo strtoupper($fetch_getWard['ward_name']); ?></u> FOR THE MONTH OF <?php echo strtoupper($fetchQuery['month_name']); ?>
                     </b>
                     </p>
                     <hr/>
@@ -106,7 +106,7 @@
                             INNER JOIN technology ON technology.t_id = students.std_tech
                             INNER JOIN roster_db ON roster_db.s_id = students.std_id
                             INNER JOIN wards ON wards.w_id = roster_db.r_ward
-                            WHERE students.std_ins = '$ins' AND roster_db.month_of = '$thisDate' ORDER BY wards.ward_name ASC");
+                            WHERE roster_db.r_ward = '$ward' AND roster_db.month_of = '$thisDate' ORDER BY wards.ward_name ASC;");
                             $iteration = 1;
 
                             while ($rowStdData = mysqli_fetch_assoc($retStdData)) {
