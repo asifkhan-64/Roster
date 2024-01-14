@@ -23,7 +23,7 @@
     <meta content="ThemeDesign" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- <link rel="shortcut icon" href="../assets/LogoFinal.png"> -->
-    <link rel="shortcut icon" href="../assets/mobiles-removebg-preview.png">
+    <link rel="shortcut icon" href="../assets/LogoSGTH.png">
     <!--Morris Chart CSS -->
     <link rel="stylesheet" href="../assets/plugins/morris/morris.css">
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -82,28 +82,28 @@
 
 
                         <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-building"></i> <span> Institutes</span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                            <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-school"></i> <span> Institutes</span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                             <ul class="list-unstyled">
                                 <li><a href="institutes_list.php">Institutes List</a></li>
                             </ul>
                         </li>
 
                         <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-mobile"></i> <span> Technology</span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                            <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-microscope"></i> <span> Technology</span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                             <ul class="list-unstyled">
                                 <li><a href="technology_list.php">Technology List</a></li>
                             </ul>
                         </li>
                                            
                         <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-chart-line"></i> <span> Ward </span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                            <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-bed"></i> <span> Ward </span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                             <ul class="list-unstyled">
                                 <li><a href="ward_list.php">Ward List</a></li>
                             </ul>
                         </li>
 
                         <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-users"></i> <span> Students </span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                            <a href="javascript:void(0);" class="waves-effect"><i class="dripicons-user-group"></i> <span> Students </span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                             <ul class="list-unstyled">
                                 <li><a href="student_add.php">Add Student</a></li>
                                 <li><a href="student_list.php">Students List</a></li>
@@ -112,7 +112,7 @@
 
 
                         <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-hand-holding-usd"></i> <span> Roster </span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                            <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-calendar"></i> <span> Roster </span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                             <ul class="list-unstyled">
                                 <li><a href="roster_add.php">Add Roster</a></li>
                                 <li><a href="roster_list.php">Roster List</a></li>
@@ -120,7 +120,7 @@
                         </li>
 
                         <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-phone"></i> <span> Reports</span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                            <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-file"></i> <span> Reports</span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                             <ul class="list-unstyled">
                                 <li><a href="report_all.php">Monthly Report</a></li>
                                 <li><a href="report_ward.php">Ward Report</a></li>
@@ -128,14 +128,14 @@
                         </li>
 
                         <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-dollar"></i><span> Backup</span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                            <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-database"></i><span> Backup</span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                             <ul class="list-unstyled">
                                 <li><a href="backup_page.php">DB Backup</a></li>
                             </ul>
                         </li>
 
                         <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="dripicons-user-group"></i> <span> Admin</span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
+                            <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-user"></i> <span> Admin</span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                             <ul class="list-unstyled">
                                 <li><a href="profile.php">Profile</a></li>
                             </ul>

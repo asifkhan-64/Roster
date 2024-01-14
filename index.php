@@ -41,7 +41,7 @@
         <meta content="ThemeDesign" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-        <link rel="shortcut icon" href="./assets/mobiles-removebg-preview.png">
+        <link rel="shortcut icon" href="./assets/LogoSGTH.png">
 
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
         <link href="assets/css/icons.css" rel="stylesheet" type="text/css">
@@ -66,7 +66,7 @@
                                 <div class="card" >
                                     <div class="card-body">
                                         <h3 class="text-center mt-0 m-b-15">
-                                            <a  class="logo logo-admin"><h3 style="font-family: Georgia; font-weight: 100">Zarak Khan Mobile</h3></a>
+                                            <a  class="logo logo-admin"><h3 style="font-family: Georgia; font-weight: 100">SGTH Roster</h3></a>
                                         </h3>
                 
                                         <h4 class="text-muted text-center font-18"><b>Sign In</b></h4><hr>

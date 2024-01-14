@@ -6,9 +6,21 @@
     }
     include('../_partials/header.php');
 
-    $countedAllProducts = mysqli_query($connect, "SELECT COUNT(*) AS countedIns FROM `institutes`");
-    $fetch_countedAllIns = mysqli_fetch_assoc($countedAllProducts);
+    $countedInst = mysqli_query($connect, "SELECT COUNT(*) AS countedIns FROM `institutes`");
+    $fetch_countedAllIns = mysqli_fetch_assoc($countedInst);
     $Ins = $fetch_countedAllIns['countedIns'];
+
+    $countedWards = mysqli_query($connect, "SELECT COUNT(*) AS countedWards FROM `wards`");
+    $fetch_countedAllWards = mysqli_fetch_assoc($countedWards);
+    $Wards = $fetch_countedAllWards['countedWards'];
+
+    $countedTechnologies = mysqli_query($connect, "SELECT COUNT(*) AS countedTechnologies FROM `technology`");
+    $fetch_countedTechnologies = mysqli_fetch_assoc($countedTechnologies);
+    $Tech = $fetch_countedTechnologies['countedTechnologies'];
+    
+    $countedStudents = mysqli_query($connect, "SELECT COUNT(*) AS countedStudents FROM `students`");
+    $fetch_countedStudents = mysqli_fetch_assoc($countedStudents);
+    $Std = $fetch_countedStudents['countedStudents'];
 
 
     // $approvedProducts = mysqli_query($connect, "SELECT COUNT(*) AS approvedProducts FROM `stock_add` WHERE mobile_status = '1' AND mobile_imei = '1'");
@@ -38,13 +50,13 @@
                         <div class="card mini-stat m-b-30" style="background-color:#DD4B39">
                             <div class="p-3  text-white">
                                 <div class="mini-stat-icon">
-                                    <i class="fa fa-area-chart float-right mb-0"></i>
+                                    <i class="fa fa-school float-right mb-0"></i>
                                 </div>
                                 <h6 class="text-uppercase mb-0">All Institutes</h6>
                             </div>
                             <div class="card-body">
-                                <div class="border-bottom pb-4 text-center text-white">
-                                    <span style="  font-size: 100px"><?php echo $Ins ?></span>
+                                <div class="pb-4 text-center text-white">
+                                    <span style="font-size: 50px"><?php echo $Ins ?></span>
                                 </div>
                             </div>
                         </div>
@@ -54,13 +66,13 @@
                         <div class="card mini-stat m-b-30" style="background-color: #00A65A">
                             <div class="p-3  text-white">
                                 <div class="mini-stat-icon">
-                                    <i class="fa fa-check float-right mb-0"></i>
+                                    <i class="fa fa-microscope float-right mb-0"></i>
                                 </div>
-                                <h6 class="text-uppercase mb-0">PTA Apprroved</h6>
+                                <h6 class="text-uppercase mb-0">Technologies</h6>
                             </div>
                             <div class="card-body">
-                                <div class="border-bottom pb-4 text-center text-white">
-                                    <span style="  font-size: 100px"><?php echo $approved ?></span>
+                                <div class="pb-4 text-center text-white">
+                                    <span style="  font-size: 50px"><?php echo $Tech ?></span>
                                 </div>
                             </div>
                         </div>
@@ -70,13 +82,13 @@
                         <div class="card mini-stat m-b-30" style="background-color:#00C0EF ">
                             <div class="p-3  text-white">
                                 <div class="mini-stat-icon">
-                                    <i class="fa fa-times float-right mb-0"></i>
+                                    <i class="fa fa-bed float-right mb-0"></i>
                                 </div>
-                                <h6 class="text-uppercase mb-0">NON_PTA</h6>
+                                <h6 class="text-uppercase mb-0">Wards</h6>
                             </div>
                             <div class="card-body">
-                                <div class="border-bottom pb-4 text-center text-white">
-                                    <span style="font-size: 100px"><?php echo $nonApproved ?></span>
+                                <div class="pb-4 text-center text-white">
+                                    <span style="font-size: 50px"><?php echo $Wards ?></span>
                                 </div>
                             </div>
                         </div>
@@ -86,13 +98,13 @@
                         <div class="card mini-stat m-b-30" style="background-color: #F39C12">
                             <div class="p-3  text-white">
                                 <div class="mini-stat-icon">
-                                    <i class="fa fa-edit float-right mb-0"></i>
+                                    <i class="fa fa-school float-right mb-0"></i>
                                 </div>
-                                <h6 class="text-uppercase  mb-0">IMEI Changed</h6>
+                                <h6 class="text-uppercase  mb-0">Students</h6>
                             </div>
                             <div class="card-body">
-                                <div class="border-bottom pb-4 text-center text-white">
-                                    <span style=" font-size: 100px"><?php echo $changeProducts  ?></span>
+                                <div class="pb-4 text-center text-white">
+                                    <span style=" font-size: 50px"><?php echo $Std  ?></span>
                                 </div>
                             </div>
                         </div>
