@@ -122,8 +122,8 @@
                         <li class="has_sub">
                             <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-phone"></i> <span> Reports</span> <span class="menu-arrow float-right"><i class="mdi mdi-chevron-right"></i></span></a>
                             <ul class="list-unstyled">
-                                <li><a href="sell_mobile_miltiple.php">Monthly Report</a></li>
-                                <li><a href="sell_mobile_miltiple_list.php">Ward Report</a></li>
+                                <li><a href="report_all.php">Monthly Report</a></li>
+                                <li><a href="report_ward.php">Ward Report</a></li>
                             </ul>
                         </li>
 

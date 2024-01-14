@@ -12,7 +12,7 @@
 
     $ins = $_GET['ins'];
 
-    $refNo = $_GET['refNo'];
+    // $refNo = $_GET['refNo'];
 
     $getIns = mysqli_query($connect, "SELECT institutes_name FROM institutes WHERE i_id = '$ins'");
     $fetch_getIns = mysqli_fetch_assoc($getIns);
@@ -54,7 +54,7 @@
     <div class="container-fluid"><br>
         <div class="row">
             <div class="col-sm-12">
-                <h5 class="page-title d-inline">Roster Print</h5>
+                <h5 class="page-title d-inline">Report Print </h5>
                 <a type="button" href="#" id="printButton" class="btn btn-success waves-effect waves-light float-right btn-lg mb-3"><i class="fa fa-print"></i> Print</a>
             </div>
         </div>
@@ -79,6 +79,7 @@
                         <?php
                         date_default_timezone_set("Asia/Karachi");
                         echo $currentDateWithYear = date("d M, Y");
+                        $thisDate = date("Y/m");
                         ?>
                         </p>
                     </div>
@@ -105,7 +106,7 @@
                             INNER JOIN technology ON technology.t_id = students.std_tech
                             INNER JOIN roster_db ON roster_db.s_id = students.std_id
                             INNER JOIN wards ON wards.w_id = roster_db.r_ward
-                            WHERE students.std_ins = '$ins' AND roster_db.refNo = '$refNo' ORDER BY wards.ward_name ASC");
+                            WHERE students.std_ins = '$ins' AND roster_db.month_of = '$thisDate' ORDER BY wards.ward_name ASC");
                             $iteration = 1;
 
                             while ($rowStdData = mysqli_fetch_assoc($retStdData)) {
@@ -142,7 +143,7 @@
                 <!-- </div> -->
             </div>
 
-            <div class="col-7"></div>
+            <!-- <div class="col-7"></div>
             <div class="col-5" align="center">
                 <p class="teext" style="margin-bottom: -10px; line-height: 0.7rem !important;">
                     Sd/_______________________
@@ -151,9 +152,9 @@
                     <br />
                     Saidu Group of Teaching Hospitals, Swat.
                 </p>
-            </div>
+            </div> -->
 
-            <div class="col-12">
+            <!-- <div class="col-12">
                 <p class="teext"  style="line-height: 0.6rem !important;">No.____________/D-3/PM/<?php echo $currentDateWithYear = date("Y"); ?></p>
                 <ol style="line-height: 1.0rem !important;">
                     <li class="listViewClass">VP Clinical Saidu Medical College, Swat.</li>
@@ -189,7 +190,7 @@
                     <br />
                     Saidu Group of Teaching Hospitals, Swat.</b>
                 </p>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
