@@ -34,7 +34,7 @@
         font-size: 10px !important;
     }
     
-    li {
+    .listViewClass {
         font-size: 10px !important;
         margin-top: -5px;
         margin-bottom: -5px;
@@ -156,17 +156,17 @@
             <div class="col-12">
                 <p class="teext"  style="line-height: 0.6rem !important;">No.____________/D-3/PM/<?php echo $currentDateWithYear = date("Y"); ?></p>
                 <ol style="line-height: 1.0rem !important;">
-                    <li>VP Clinical Saidu Medical College, Swat.</li>
-                    <li>DMS Central Wing, Saidu Group of Teaching Hospitals, Swat.</li>
-                    <li>DMS Saidu Wing, Saidu Group of Teaching Hospitals, Swat.</li>
-                    <li>DMS Casualty, Saidu Group of Teaching Hospitals, Swat.</li>
-                    <li>Manager RBC Swat.</li>
-                    <li>Secretary Medical Faculty, Khyber Pakhtunkhwa Peshawar.</li>
-                    <li>Chief Nursing Superintendent, Saldu Group of Teaching Hospitals, S.vat.</li>
-                    <li>Supervisor, Paramedical Students, Saidu Group of Teaching Hospitals, Swat.</li>
-                    <li>Accounts Section, MS Office, S.T.H, Swat</li>
-                    <li>Incharge of the concerned Units with the direction to arrange shift wise training internally.</li>
-                    <li>Principal Frontier Institute of Medical Sclences Swat for information and necessary action.</li>
+                    <li class="listViewClass">VP Clinical Saidu Medical College, Swat.</li>
+                    <li class="listViewClass">DMS Central Wing, Saidu Group of Teaching Hospitals, Swat.</li>
+                    <li class="listViewClass">DMS Saidu Wing, Saidu Group of Teaching Hospitals, Swat.</li>
+                    <li class="listViewClass">DMS Casualty, Saidu Group of Teaching Hospitals, Swat.</li>
+                    <li class="listViewClass">Manager RBC Swat.</li>
+                    <li class="listViewClass">Secretary Medical Faculty, Khyber Pakhtunkhwa Peshawar.</li>
+                    <li class="listViewClass">Chief Nursing Superintendent, Saldu Group of Teaching Hospitals, S.vat.</li>
+                    <li class="listViewClass">Supervisor, Paramedical Students, Saidu Group of Teaching Hospitals, Swat.</li>
+                    <li class="listViewClass">Accounts Section, MS Office, S.T.H, Swat</li>
+                    <li class="listViewClass">Incharge of the concerned Units with the direction to arrange shift wise training internally.</li>
+                    <li class="listViewClass">Principal Frontier Institute of Medical Sclences Swat for information and necessary action.</li>
                 </ol>
                 <p class="teext" style="line-height: 0.7rem !important;">
                     <b>Note:

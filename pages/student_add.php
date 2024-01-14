@@ -16,25 +16,74 @@
         $std_ins    = $_POST['std_ins'];
         $std_tech   = $_POST['std_tech'];
 
-        $queryAddStock = mysqli_query($connect, 
-            "INSERT INTO `students`(
-                `std_name`,
-                 `std_fname`,
-                  `std_ins`,
-                   `std_tech`
-                ) VALUES (
-                    '$std_name',
-                     '$std_fname',
-                      '$std_ins',
-                       '$std_tech'
-            )
-           ");
+        
 
-        if (!$queryAddStock) {
-            $notAdded = 'Not added';
-        }else {
-            header("LOCATION: student_list.php");
-        }
+            date_default_timezone_set("Asia/Karachi");
+            $currentDateWithYear = date("Y/m");
+            $currentDate = date("d");
+            $monthIs = date("m");
+            $month = (int)$monthIs;
+
+            $checkRosterDBTbl = mysqli_query($connect, "SELECT COUNT(*) AS countedRosters FROM `roster_db` WHERE month_of = '$currentDateWithYear' AND std_ins = '$std_ins'");
+            $fetch_checkRosterDBTbl = mysqli_fetch_assoc($checkRosterDBTbl);
+            $check = $fetch_checkRosterDBTbl['countedRosters'];
+            
+
+
+            if ($currentDate > 12) {
+                $queryAddStock = mysqli_query($connect, 
+                "INSERT INTO `students`(
+                    `std_name`,
+                    `std_fname`,
+                    `std_ins`,
+                    `std_tech`
+                    ) VALUES (
+                        '$std_name',
+                        '$std_fname',
+                        '$std_ins',
+                        '$std_tech'
+                    )
+                ");
+
+                if (!$queryAddStock) {
+                    $notAdded = 'Not added';
+                }else {
+                    header("LOCATION: student_list.php");
+                }
+            }else {
+                if ($check > 0) {
+                    $queryAddStock = mysqli_query($connect, 
+                    "INSERT INTO `students`(
+                        `std_name`,
+                        `std_fname`,
+                        `std_ins`,
+                        `std_tech`
+                        ) VALUES (
+                            '$std_name',
+                            '$std_fname',
+                            '$std_ins',
+                            '$std_tech'
+                        )
+                    ");
+
+                    $getId = mysqli_query($connect, "SELECT MAX(std_id) As std_id FROM `students`");
+                    $fetch_getId = mysqli_fetch_assoc($getId);
+                    $stdID = $fetch_getId['std_id'];
+
+                    header("LOCATION: roster_single.php?ins=".$std_ins."&month=".$month."&std_id=".$stdID."");
+                }else {
+                    if (!$queryAddStock) {
+                        $notAdded = 'Not added';
+                    }else {
+                        header("LOCATION: student_list.php");
+                    }
+                }
+                
+            }
+
+
+
+            
     }
 
 

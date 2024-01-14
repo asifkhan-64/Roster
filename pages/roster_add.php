@@ -10,11 +10,25 @@
 
 
     if (isset($_POST['roster'])) {
-
         $std_ins    = $_POST['std_ins'];
         $month    = $_POST['month'];
+
+        date_default_timezone_set("Asia/Karachi");
+        $currentYear = date("Y/m");
+
+        $checkRosterDBTbl = mysqli_query($connect, "SELECT COUNT(*) AS countedRosters FROM `roster_db` WHERE month_of = '$currentYear' AND std_ins = '$std_ins'");
+        $fetch_checkRosterDBTbl = mysqli_fetch_assoc($checkRosterDBTbl);
+        $check = $fetch_checkRosterDBTbl['countedRosters'];
+
+        if ($check > 0) {
+            $insName = mysqli_query($connect, "SELECT * FROM `institutes` WHERE i_id = '$std_ins'");
+            $fetch_insName = mysqli_fetch_assoc($insName);
+            $insNameIs = $fetch_insName['institutes_name'];
+            $notAdded = '<div class="alert alert-danger">'.$insNameIs.' Institute Roster Already added for this month.</div>';
+        }else {
+            header("LOCATION: roster_college.php?ins=".$std_ins."&month=".$month."");
+        }
         
-        header("LOCATION: roster_college.php?ins=".$std_ins."&month=".$month."");
     }
 
 
@@ -45,6 +59,7 @@
                                         
                                         echo '<select class="form-control comp" name="std_ins" required>';
                                         while ($row = mysqli_fetch_assoc($getInstitutes)) {
+                                            
                                             echo '<option value="'.$row['i_id'].'">'.$row['institutes_name'].'</option>';
                                         }
 
@@ -77,10 +92,10 @@
                             </div>
                             
                         </form>
+                        <h3 class="text-center">
+                            <?php echo $notAdded; ?>
+                        </h3>
                     </div>
-                    <h3>
-                        <?php echo $notAdded; ?>
-                    </h3>
                 </div>
             </div> <!-- end col -->
         </div> <!-- end row -->
