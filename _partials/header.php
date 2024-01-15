@@ -124,6 +124,7 @@
                             <ul class="list-unstyled">
                                 <li><a href="report_all.php">Monthly Report</a></li>
                                 <li><a href="report_ward.php">Ward Report</a></li>
+                                <li><a href="report_ppdr.php">PPD Report</a></li>
                             </ul>
                         </li>
 

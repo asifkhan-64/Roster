@@ -79,7 +79,13 @@
                         <?php
                         date_default_timezone_set("Asia/Karachi");
                         echo $currentDateWithYear = date("d M, Y");
-                        $thisDate = date("Y/m");
+                        $date = date("Y");
+
+                        if ($month < 10) {
+                            $thisDate = $date."/0".$month;
+                        }else {
+                            $thisDate = $date."/".$month;
+                        }
                         ?>
                         </p>
                     </div>
@@ -125,7 +131,7 @@
 
                                         $getRosterData = mysqli_query($connect, "SELECT roster_db.r_ward, wards.ward_name  FROM roster_db
                                         INNER JOIN wards ON wards.w_id = roster_db.r_ward
-                                        WHERE roster_db.s_id = $studentId");
+                                        WHERE roster_db.s_id = '$studentId'");
 
                                         $fetch_getRosterData = mysqli_fetch_assoc($getRosterData);
                                         $r_ward = $fetch_getRosterData['ward_name'];

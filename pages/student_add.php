@@ -30,7 +30,7 @@
             
 
 
-            if ($currentDate > 12) {
+            if ($currentDate > 16) {
                 $queryAddStock = mysqli_query($connect, 
                 "INSERT INTO `students`(
                     `std_name`,

@@ -79,7 +79,14 @@
                         <?php
                         date_default_timezone_set("Asia/Karachi");
                         echo $currentDateWithYear = date("d M, Y");
-                        $thisDate = date("Y/m");
+                        $date = date("Y");
+                        
+
+                        if ($month < 10) {
+                            echo $thisDate = $date."/0".$month;
+                        }else {
+                            echo $thisDate = $date."/".$month;
+                        }
                         ?>
                         </p>
                     </div>

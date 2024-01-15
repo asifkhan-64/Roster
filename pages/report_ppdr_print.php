@@ -6,17 +6,16 @@
     }
 
     $month = $_GET['month'];
+    $date = $_GET['date'];
+
+    if ($month < 10) {
+        $dateIs = $date."/0".$month;
+    }else {
+        $dateIs = $date."/".$month;
+    }
 
     $query = mysqli_query($connect, "SELECT * FROM months WHERE m_id = '$month'");
     $fetchQuery = mysqli_fetch_assoc($query);
-
-    $ins = $_GET['ins'];
-
-    $refNo = $_GET['refNo'];
-
-    $getIns = mysqli_query($connect, "SELECT institutes_name FROM institutes WHERE i_id = '$ins'");
-    $fetch_getIns = mysqli_fetch_assoc($getIns);
-
 
 
     include('../_partials/header.php');
@@ -54,7 +53,7 @@
     <div class="container-fluid"><br>
         <div class="row">
             <div class="col-sm-12">
-                <h5 class="page-title d-inline">Roster Print</h5>
+                <h5 class="page-title d-inline">Report Print </h5>
                 <a type="button" href="#" id="printButton" class="btn btn-success waves-effect waves-light float-right btn-lg mb-3"><i class="fa fa-print"></i> Print</a>
             </div>
         </div>
@@ -63,37 +62,39 @@
         <div class="row" id="printElement">
             <div class="col-12">
                 <!-- <div class="card m-b-30"> -->
-                    <p align="center" style="font-size: 12px !important; line-height: 0.6rem !important; line-height: 0.6rem !important; margin-bottom: 0.1rem;"><b>SAIDU GROUP OF TEACHING HOSPITALS, SWAT</b></p>
+                    <p align="center" style="font-size: 12px !important; line-height: 0.6rem !important; line-height: 0.6rem !important; margin-bottom: 0.1rem;">
+                    <b>SAIDU GROUP OF TEACHING HOSPITALS, SWAT</b></p>
                     <p align="center" style="font-size: 12px !important; line-height: 1rem !important; margin-bottom: 0.1rem;"><b>
-                        DUTY ROSTER FOR PRACTICAL TRAINING OF STUDENTS OF <?php echo $fetch_getIns['institutes_name']; ?> FOR THE MONTH OF <?php echo strtoupper($fetchQuery['month_name']); ?>
+                    PRIVATE PARAMEDICAL INSTITUTES STUDENTS DISTRIBUTION, FOR THE MONTH OF <q><?php echo strtoupper($fetchQuery['month_name']); ?></q>
                     </b>
                     </p>
-                    <hr/>
+                    <hr style="background-color: black;" class="p-0 m-2" />
 
                 <div class="row">
                     <div class="col-md-6">
-                        <p style="font-size: 10px !important;">No.____________/D-3/PM</p>
+                        <!-- <p style="font-size: 10px !important;">No.______/D-3/PM</p> -->
                     </div>
                     <div class="col-md-6 text-right">
                         <p style="font-size: 10px !important;">Date: 
                         <?php
                         date_default_timezone_set("Asia/Karachi");
                         echo $currentDateWithYear = date("d M, Y");
+                        $thisDate = date("Y/m");
                         ?>
                         </p>
                     </div>
                 </div>
 
                 <!-- <div class="card-body"> -->
-                    <table id="datatables" class="table dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <table id="datatables" class="table dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; border-color: #fff !important; width: 100%;">
                         <thead>
-                            <tr>
-                                <th>S#</th>
-                                <th>Name</th>
-                                <th>Father Name</th>
-                                <th>Category</th>
-                                <th>Month</th>
-                                <th>Place of Duty</th>
+                            <tr style="border-color: #fff; border-bottom: none !important">
+                                <th style=" border: none !important">S#</th>
+                                <th style=" border: none !important">Unit / Institute</th>
+                                <th style=" border: none !important">Total</th>
+                                <th style=" border: none !important">Amount</th>
+                                <th class="text-center" style=" border: none !important">Signature</th>
+                                <!-- <th>Place of Duty</th> -->
                                 <!-- <th class="text-center"> <i class="fa fa-edit"></i> -->
                                 </th>
                             </tr>
@@ -101,40 +102,39 @@
 
                         <tbody>
                             <?php 
-                            $retStdData = mysqli_query($connect, "SELECT students.*, technology.technology_name, roster_db.refNo, wards.ward_name FROM `students`
-                            INNER JOIN technology ON technology.t_id = students.std_tech
-                            INNER JOIN roster_db ON roster_db.s_id = students.std_id
-                            INNER JOIN wards ON wards.w_id = roster_db.r_ward
-                            WHERE students.std_ins = '$ins' AND roster_db.refNo = '$refNo' ORDER BY wards.ward_name ASC");
+                            $retWards = mysqli_query($connect, "SELECT * FROM `wards`");
                             $iteration = 1;
+                            $total = 0;
 
-                            while ($rowStdData = mysqli_fetch_assoc($retStdData)) {
-                                if (empty($rowStdData['month_one']) or empty($rowStdData['month_two']) or empty($rowStdData['month_three']) or empty($rowStdData['month_four']) or empty($rowStdData['month_five']) or empty($rowStdData['month_six'])) {
-                                    echo '
-                                    <tr>
-                                        <td style="width: 3%">'.$iteration++.'.</td>
-                                        <td style="width: 20%">'.$rowStdData['std_name'].'</td>
-                                        <td style="width: 20%">'.$rowStdData['std_fname'].'</td>
-                                        <td style="width: 20%">'.$rowStdData['technology_name'].'</td>
-                                        <td style="width: 2%">'."0".''.$rowStdData['month_count'].'</td>';
+                            while ($retWardRow = mysqli_fetch_assoc($retWards)) {
+                                $wardID = $retWardRow['w_id'];
 
-                                        $getWard = mysqli_query($connect, "SELECT * FROM wards");
-                                        $fetchGetWard = mysqli_fetch_assoc($getWard);
-                                        $studentId = $rowStdData['std_id'];
-
-                                        $getRosterData = mysqli_query($connect, "SELECT roster_db.r_ward, wards.ward_name  FROM roster_db
-                                        INNER JOIN wards ON wards.w_id = roster_db.r_ward
-                                        WHERE roster_db.s_id = $studentId");
-
-                                        $fetch_getRosterData = mysqli_fetch_assoc($getRosterData);
-                                        $r_ward = $fetch_getRosterData['ward_name'];
-                                        
-                                        echo '<td style="width: 35%">'.$r_ward.'</td>
-                                    </tr>
-                                    ';
-                                    
+                                $getWardCount = mysqli_query($connect, "SELECT COUNT(*) AS countedTotal FROM `roster_db` WHERE month_of = '$dateIs' AND r_ward = '$wardID'");
+                                $fetch_getWardCount = mysqli_fetch_assoc($getWardCount);
+                                $countedWardsTotal = $fetch_getWardCount['countedTotal'];
+                                $total = $total + $countedWardsTotal;
+                                if ($countedWardsTotal > 0) {
+                                echo '
+                                <tr>
+                                    <td style="border: none !important; width: 3%; ">'.$iteration++.'.</td>
+                                    <td style="border: none !important; width: 37%; ">'.$retWardRow['ward_name'].'</td>
+                                    <td style="border: none !important; width: 20%; ">'.$countedWardsTotal.'</td>
+                                    <td style="border: none !important; width: 20%; "></td>
+                                    <td style="border: none !important; width: 20%; border-bottom: 1px solid black !important"></td>
+                                </tr>
+                                ';
                                 }
-                            }
+                            }   
+
+                            echo '
+                            
+                                <tr>
+                                    <td style="border: none !important; width: 3%; "></td>
+                                    <td class="text-right" style="border: none !important; width: 37%; "><b>Total:</b></td>
+                                    <td class="text-left" style="border: none !important; width: 20%; "><b>'.$total.'</b></td>
+                                    <td style="border: none !important; width: 20%; "></td>
+                                    <td class="text-right" style="border: none !important; width: 20%; "></td>
+                                </tr>';
                             ?>
                         </tbody>
                     </table>
@@ -142,8 +142,7 @@
                 <!-- </div> -->
             </div>
 
-            <div class="col-12"><hr style="background-color: black;" /></div>
-            <div class="col-7"></div>
+            <!-- <div class="col-7"></div>
             <div class="col-5" align="center">
                 <p class="teext" style="margin-bottom: -10px; line-height: 0.7rem !important;">
                     Sd/_______________________
@@ -152,9 +151,9 @@
                     <br />
                     Saidu Group of Teaching Hospitals, Swat.
                 </p>
-            </div>
+            </div> -->
 
-            <div class="col-12">
+            <!-- <div class="col-12">
                 <p class="teext"  style="line-height: 0.6rem !important;">No.____________/D-3/PM/<?php echo $currentDateWithYear = date("Y"); ?></p>
                 <ol style="line-height: 1.0rem !important;">
                     <li class="listViewClass">VP Clinical Saidu Medical College, Swat.</li>
@@ -190,7 +189,7 @@
                     <br />
                     Saidu Group of Teaching Hospitals, Swat.</b>
                 </p>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
